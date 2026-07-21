@@ -9,7 +9,14 @@ import time
 from typing import Any, Optional, Tuple
 
 import torch
-from transformers import AutoModelForVision2Seq, AutoProcessor
+from transformers import AutoProcessor
+
+try:
+    # Available on newer transformers versions used by OpenVLA stacks.
+    from transformers import AutoModelForVision2Seq  # type: ignore
+except Exception:  # pragma: no cover - fallback path for older/newer API shifts
+    # Robust fallback for environments where AutoModelForVision2Seq is unavailable.
+    from transformers import AutoModelForImageTextToText as AutoModelForVision2Seq  # type: ignore
 
 from config import DEFAULT_MODEL_ID, CACHE_DIR
 from src.device import detect_system_info, SystemInfo
@@ -49,7 +56,6 @@ class OpenVLAModelLoader:
 
         if backend == "CUDA" and torch.cuda.is_available():
             device = "cuda"
-            # Use bfloat16 if GPU supports Ampere/newer or float16 as standard
             if torch.cuda.is_bf16_supported():
                 dtype = torch.bfloat16
             else:
@@ -69,7 +75,7 @@ class OpenVLAModelLoader:
         """
         if device == "cuda" and torch.cuda.is_available():
             return torch.cuda.memory_allocated()
-        elif device == "mps" and hasattr(torch.cuda, "memory_allocated"):
+        elif device == "mps":
             return 0
         else:
             try:
@@ -91,7 +97,6 @@ class OpenVLAModelLoader:
         start_time = time.time()
 
         try:
-            # 1. Load Processor
             model_logger.info("Loading processor...")
             processor = AutoProcessor.from_pretrained(
                 self.model_id,
@@ -99,10 +104,8 @@ class OpenVLAModelLoader:
                 trust_remote_code=True,
             )
 
-            # 2. Load Model
             model_logger.info("Loading model weights (this may take a few moments)...")
-            
-            # Low CPU memory usage load strategy
+
             load_kwargs = {
                 "pretrained_model_name_or_path": self.model_id,
                 "cache_dir": str(self.cache_dir),
@@ -113,7 +116,6 @@ class OpenVLAModelLoader:
 
             model = AutoModelForVision2Seq.from_pretrained(**load_kwargs)
 
-            # Move model to target device
             model_logger.info(f"Moving model to device ({device_str.upper()})...")
             model.to(device_str)
             model.eval()
