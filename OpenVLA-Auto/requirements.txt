@@ -1,0 +1,14 @@
+torch
+torchvision
+transformers
+huggingface_hub
+safetensors
+accelerate
+opencv-python
+pillow
+numpy
+tqdm
+requests
+pyyaml
+psutil
+py-cpuinfo

@@ -1,0 +1,12 @@
+[2026-07-21 14:44:19] [ERROR] [Errors] Pip installation failed on attempt 1: ERROR: Could not install packages due to an OSError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\rames\\.gemini\\antigravity\\scratch\\OpenVLA-Auto\\.venv\\Lib\\site-packages\\numpy\\ma\\__init__.py'
+Check the permissions.
+
+
+[notice] A new release of pip is available: 25.0.1 -> 26.1.2
+[notice] To update, run: C:\Users\rames\.gemini\antigravity\scratch\OpenVLA-Auto\.venv\Scripts\python.exe -m pip install --upgrade pip
+[2026-07-21 14:44:19] [ERROR] [Errors] Pip installation failed on attempt 1: ERROR: Could not install packages due to an OSError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\rames\\.gemini\\antigravity\\scratch\\OpenVLA-Auto\\.venv\\Lib\\site-packages\\numpy\\ma\\__init__.py'
+Check the permissions.
+
+
+[notice] A new release of pip is available: 25.0.1 -> 26.1.2
+[notice] To update, run: C:\Users\rames\.gemini\antigravity\scratch\OpenVLA-Auto\.venv\Scripts\python.exe -m pip install --upgrade pip
