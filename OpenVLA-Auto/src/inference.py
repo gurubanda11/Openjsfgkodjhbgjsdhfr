@@ -22,7 +22,7 @@ class InferenceResult:
     action_text: str
     latency_ms: float
     device: str
-    raw_output_text: str
+    raw_output_text: str = ""
 
 
 class OpenVLAInferenceEngine:
