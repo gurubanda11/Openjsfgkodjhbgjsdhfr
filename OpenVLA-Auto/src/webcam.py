@@ -72,7 +72,7 @@ class WebcamRunner:
             pass
         return cams[0]
 
-    def render_hud_overlay(self, frame: np.ndarray, result: InferenceResult, fps: float, mode: str, paused: bool) -> np.ndarray:
+    def render_hud_overlay(self, frame: np.ndarray, result: InferenceResult, fps: float, mode: str = "robot", paused: bool = False) -> np.ndarray:
         annotated = frame.copy()
         height, width, _ = annotated.shape
 

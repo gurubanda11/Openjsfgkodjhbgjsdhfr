@@ -9,14 +9,21 @@ import time
 from typing import Any, Optional, Tuple
 
 import torch
-from transformers import AutoProcessor
+
+try:
+    from transformers import AutoProcessor  # type: ignore
+except Exception:  # pragma: no cover - optional dependency fallback
+    AutoProcessor = None  # type: ignore[assignment]
 
 try:
     # Available on newer transformers versions used by OpenVLA stacks.
     from transformers import AutoModelForVision2Seq  # type: ignore
 except Exception:  # pragma: no cover - fallback path for older/newer API shifts
-    # Robust fallback for environments where AutoModelForVision2Seq is unavailable.
-    from transformers import AutoModelForImageTextToText as AutoModelForVision2Seq  # type: ignore
+    try:
+        # Older versions exposed the equivalent class under a different name.
+        from transformers import AutoModelForImageTextToText as AutoModelForVision2Seq  # type: ignore
+    except Exception:  # pragma: no cover - optional dependency fallback
+        AutoModelForVision2Seq = None  # type: ignore[assignment]
 
 from config import DEFAULT_MODEL_ID, CACHE_DIR
 from src.device import detect_system_info, SystemInfo
@@ -90,6 +97,11 @@ class OpenVLAModelLoader:
         """
         Loads the model and processor, returning a LoadedModelContainer.
         """
+        if AutoProcessor is None or AutoModelForVision2Seq is None:
+            raise RuntimeError(
+                "transformers is required to load OpenVLA models. Run the installer or install the dependencies before loading the live model."
+            )
+
         device_str, dtype = self.select_device_and_dtype()
         model_logger.info(f"Loading OpenVLA model '{self.model_id}'...")
         model_logger.info(f"Target Device: {device_str.upper()} | Precision: {dtype}")

@@ -1,0 +1,28 @@
+{
+  "episodes": 1,
+  "mean_score": -13.01020762827278,
+  "mean_reward": -11.182981491088867,
+  "mean_gates_cleared": 0.0,
+  "mean_collisions": 1.0,
+  "mean_time_s": 4.749999999999991,
+  "success_rate": 0.0,
+  "episode_reports": [
+    {
+      "score": -13.01020762827278,
+      "reward": -11.182981491088867,
+      "gates_cleared": 0,
+      "collisions": 1,
+      "gate_precision": 0.0,
+      "efficiency": 0.0,
+      "smoothness": 0.9965974572424066,
+      "safety": 1.0,
+      "off_course_events": 1,
+      "time_elapsed_s": 4.749999999999991,
+      "energy_used_wh": 0.07062336707467391,
+      "timed_out": false,
+      "success": false,
+      "curriculum_level": "easy"
+    }
+  ],
+  "checkpoint_path": "C:\\Users\\lucky\\OneDrive\\Documents\\GitHub\\Openjsfgkodjhbgjsdhfr\\OpenVLA-Auto\\artifacts\\checkpoints\\tsa_policy.pt"
+}

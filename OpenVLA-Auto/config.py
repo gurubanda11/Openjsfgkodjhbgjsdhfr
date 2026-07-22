@@ -10,12 +10,16 @@ BASE_DIR = Path(__file__).parent.resolve()
 SRC_DIR = BASE_DIR / "src"
 MODELS_DIR = BASE_DIR / "models"
 CACHE_DIR = MODELS_DIR / "cache"
+ARTIFACTS_DIR = BASE_DIR / "artifacts"
+CHECKPOINTS_DIR = ARTIFACTS_DIR / "checkpoints"
+REPORTS_DIR = ARTIFACTS_DIR / "reports"
+SIM_OUTPUT_DIR = ARTIFACTS_DIR / "sim"
 LOGS_DIR = BASE_DIR / "logs"
 TESTS_DIR = BASE_DIR / "tests"
 VENV_DIR = BASE_DIR / ".venv"
 
 # Ensure essential directories exist
-for directory in [MODELS_DIR, CACHE_DIR, LOGS_DIR]:
+for directory in [MODELS_DIR, CACHE_DIR, ARTIFACTS_DIR, CHECKPOINTS_DIR, REPORTS_DIR, SIM_OUTPUT_DIR, LOGS_DIR]:
     directory.mkdir(parents=True, exist_ok=True)
 
 # Hugging Face Model Configuration
@@ -57,3 +61,13 @@ CAMERA_WIDTH = 960
 CAMERA_HEIGHT = 540
 SIM_PANEL_WIDTH = 480
 HUD_HEIGHT = 170
+
+# TSA / simulation defaults
+DEFAULT_LAUNCHER_MODE = "live"
+DEFAULT_SEED = 2026
+DEFAULT_TRAIN_EPISODES = 8
+DEFAULT_TRAIN_EPOCHS = 4
+DEFAULT_EVAL_EPISODES = 5
+DEFAULT_SIM_EPISODES = 2
+DEFAULT_CHECKPOINT_NAME = "tsa_policy.pt"
+DEFAULT_REPORT_NAME = "tsa_eval_report.json"
