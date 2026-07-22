@@ -10,3 +10,5 @@ Check the permissions.
 
 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
 [notice] To update, run: C:\Users\rames\.gemini\antigravity\scratch\OpenVLA-Auto\.venv\Scripts\python.exe -m pip install --upgrade pip
+[2026-07-21 17:36:42] [ERROR] [Errors] Unhandled exception in launcher main: 'Drone3DSimEnv' object has no attribute '_build_observation'
+[2026-07-21 17:36:42] [ERROR] [Errors] Unhandled exception in launcher main: 'Drone3DSimEnv' object has no attribute '_build_observation'
